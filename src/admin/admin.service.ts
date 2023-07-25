@@ -5,6 +5,7 @@ import { AdminEntity } from "src/admin/admin.entity";
 import { AdminDto } from "src/admin/admin.dto";
 import { AdminLoginDto } from "src/admin/adminlogin.dto";
 import { MailerService } from '@nestjs-modules/mailer';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AdminService {
@@ -57,6 +58,14 @@ export class AdminService {
 
   async findOneByEmail(email:string):Promise<AdminEntity | undefined> {
     return this.adminRepository.findOne({where: {email }});
+  }
+
+
+
+  async hashPassword(password: string): Promise<string> {
+    const saltOrRounds = 10; 
+    const hashedPassword = await bcrypt.hash(password, saltOrRounds);
+    return hashedPassword;
   }
 
 
