@@ -1,18 +1,18 @@
 import{IsNotEmpty,Length,IsEmail} from "class-validator";
 
 export class UserDto{
-	@IsNotEmpty({message:'Empty!!!'})
-	@Length(5,30)
+	@IsNotEmpty()
+	
 	name:string;
 
-	@IsNotEmpty({message:'Empty!!!'})
-	@Length(4,8)
+	@IsNotEmpty()
+	
 	password:string;
 
-	@IsNotEmpty({message:'Empty!!!'})
-	@Length(6,12)
+	@IsNotEmpty()
+	
 	contact:number;
 
-	@IsNotEmpty({message:'Empty!!!'})
+	@IsNotEmpty()
 	type: string;
 }

@@ -34,7 +34,11 @@ export class AdminService {
 
 
   getAdmin(id):any{
-    return this.adminRepository.find({where:{id:id}},)
+    return this.adminRepository.find({where:{id:id}})
+  }
+
+  findOneByEmail(email: string) {
+    return this.adminRepository.findOneBy({ email });
   }
 
   deleteAdmin(id): any {
@@ -56,17 +60,17 @@ export class AdminService {
   }
 
 
-  async findOneByEmail(email:string):Promise<AdminEntity | undefined> {
-    return this.adminRepository.findOne({where: {email }});
-  }
+  // async findOneByEmail(email:string):Promise<AdminEntity | undefined> {
+  //   return this.adminRepository.findOne({where: {email }});
+  // }
 
 
 
-  async hashPassword(password: string): Promise<string> {
-    const saltOrRounds = 10; 
-    const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-    return hashedPassword;
-  }
+  // async hashPassword(password: string): Promise<string> {
+  //   const saltOrRounds = 10; 
+  //   const hashedPassword = await bcrypt.hash(password, saltOrRounds);
+  //   return hashedPassword;
+  // }
 
 
 

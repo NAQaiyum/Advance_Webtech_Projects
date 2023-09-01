@@ -13,7 +13,7 @@ export class AdminController {
 	constructor(private readonly adminService:AdminService){}
 
 	@Post('/insertAdmin')
-	@UseGuards(SessionGuard)
+	// @UseGuards(SessionGuard)
 	@UsePipes(new ValidationPipe())
 	insertAdmin (@Body() admindto:AdminDto){
 		return this.adminService.insertAdmin(admindto);
@@ -42,11 +42,16 @@ export class AdminController {
 	}
 	
 	@Get('/allAdmin')
-	@UseGuards(SessionGuard)
+	//@UseGuards(SessionGuard)
 	allAdmin():any
 	{
       return this.adminService.allAdmin();
 	}
+
+	@Get('/getemail/:email')
+    findOneByEmail(@Param('email') email: string) {
+       return this.adminService.findOneByEmail(email);
+    }
 
 
     @Post('/login')
@@ -54,7 +59,7 @@ export class AdminController {
     {
     	const admin = await this.adminService.findOneByEmail(user.email);
 
-    	if(admin && admin.password === user.password && admin.contact == user.contact)
+    	if(admin && admin.password === user.password )
     	{
     		session.adminid = admin.id;
     		return 'Login Success' ;
@@ -66,7 +71,7 @@ export class AdminController {
 
 
     @Post('/logout')
-    @UseGuards(SessionGuard)
+    
     async logout(@Session() session:Record<string,any>){
     	session.destroy();
     	return 'Logout Success' ;
@@ -74,7 +79,7 @@ export class AdminController {
 
 
     @Post('/send-email')
-    @UseGuards(SessionGuard)
+    
     async sendEmail(@Body() emailData: { to: string; subject: string; text: string }) {
         try {
             await this.adminService.sendEmail(emailData.to, emailData.subject, emailData.text);

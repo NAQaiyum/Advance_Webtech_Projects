@@ -1,22 +1,22 @@
 import{IsNotEmpty,Length,IsEmail} from "class-validator";
 
 export class AdminDto{
-	@IsNotEmpty({message:'Name can not be empty!'})
-	@Length(5,30)
+	@IsNotEmpty()
+	
 	name:string;
 
 	@IsEmail()
 	email:string;
 
-	@IsNotEmpty({message:'Password can not be empty!'})
-	@Length(4,10)
+	@IsNotEmpty()
+	
 	password:string;
 
-	@IsNotEmpty({message:'Empty!'})
-	@Length(6,12)
+	@IsNotEmpty()
+	
 	contact:number;
 
-	@IsNotEmpty({message:'Empty!'})
+	@IsNotEmpty()
 	gender:string;
 
 	//image:string;
